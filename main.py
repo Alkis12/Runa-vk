@@ -3,11 +3,14 @@ from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 import random
 import json
 
-all_players = []
+name = 'руна'
+with open("../data.json", "r", encoding='utf8') as data:
+    inf = json.load(data)[name]
+GROUP_ID = inf["GROUP_ID"]
+TOKEN = inf["TOKEN"]
 
+all_players = []
 sess = {}
-RUNA_ID = 202706139
-RUNA_TOKEN = 'b0d92af4223aaa0659a63f7638e34804ad1db6784be516c3e446571ed55b94b31c7d6cfad129f7cbd2454'
 with open("moneys.json", "r", encoding='utf8') as re:
     mmm = json.load(re)
     moneys = {}
@@ -22,8 +25,6 @@ with open("keys.json", "r", encoding='utf8') as re:
     keys = json.load(re)
 with open("names1.json", "r", encoding='utf8') as re:
     names1 = json.load(re)
-
-name = 'руна'
 
 
 class perudo():
@@ -992,8 +993,8 @@ class kakegurui():
 
 
 name_of_game = ''
-vk_session = vk_api.VkApi(token=RUNA_TOKEN)
-longpoll = VkBotLongPoll(vk_session, RUNA_ID)
+vk_session = vk_api.VkApi(token=TOKEN)
+longpoll = VkBotLongPoll(vk_session, GROUP_ID)
 for event in longpoll.listen():
     if event.type == VkBotEventType.MESSAGE_NEW:
         vk = vk_session.get_api()
